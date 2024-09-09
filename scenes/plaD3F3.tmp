@@ -10,7 +10,7 @@ radius = 76.99
 script = ExtResource("1_irvto")
 isPlatformerMode = false
 isMouseMode = false
-bulletSpeed = 500
+fireRate = 0.4
 
 [node name="FirePoint" type="Node2D" parent="."]
 position = Vector2(68, -1)
