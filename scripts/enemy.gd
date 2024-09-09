@@ -7,6 +7,8 @@ extends RigidBody2D
 @onready var firePoint = $FirePointEnemy
 @onready var fire_rate_timer = $FireRate
 
+@onready var face_sprite = $FaceSprite
+
 var bulletPrefab = preload("res://scenes/enemybullet.tscn")
 
 var Player : Node
@@ -18,7 +20,8 @@ func _ready():
 		Gamemanager.connect("control_mode_changed", _on_control_mode_changed)
 
 func _physics_process(delta):
-	if Player:
+	spriteControl()
+	if Player and Gamemanager.currentControlMode == Gamemanager.controlMode.TOP_DOWN:
 		targetPlayer()
 
 #Take damage and lose HP
@@ -63,3 +66,6 @@ func _on_control_mode_changed(_newControlMode):
 	if _newControlMode == Gamemanager.controlMode.TOP_DOWN:
 		print("I SHOULD EXIST")
 	
+
+func spriteControl():
+	face_sprite.rotation = rotation * -1
