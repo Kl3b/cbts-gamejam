@@ -12,8 +12,6 @@ position = Vector2(577, 367)
 acceleration = 6000.0
 deceleration = 12000.0
 top_speed = 600.0
-jump_force = 2000
-gravity = 3000.0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(27, 34)
