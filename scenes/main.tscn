@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cttki30ka556i"]
+[gd_scene load_steps=4 format=3 uid="uid://cttki30ka556i"]
 
 [ext_resource type="PackedScene" uid="uid://buyretagrgoor" path="res://scenes/player.tscn" id="1_l4fnd"]
+[ext_resource type="PackedScene" uid="uid://dy6qoxg2nvjuf" path="res://scenes/enemy.tscn" id="2_wp6hw"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wek2x"]
 
@@ -8,7 +9,6 @@
 
 [node name="Player" parent="." instance=ExtResource("1_l4fnd")]
 position = Vector2(561, 315)
-isMouseMode = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(27, 34)
@@ -16,3 +16,9 @@ position = Vector2(27, 34)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(574, 588)
 shape = SubResource("WorldBoundaryShape2D_wek2x")
+
+[node name="Enemy" parent="." instance=ExtResource("2_wp6hw")]
+position = Vector2(184, 138)
+
+[node name="Enemy2" parent="." instance=ExtResource("2_wp6hw")]
+position = Vector2(133, 398)
