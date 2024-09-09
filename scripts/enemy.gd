@@ -16,8 +16,8 @@ func _ready():
 	#Get player from game manager
 	Player = Gamemanager.Player
 	#Connect to mode change signal
-	if Player:
-		Gamemanager.connect("control_mode_changed", _on_control_mode_changed)
+	#if Player:
+		#Gamemanager.connect("control_mode_changed", _on_control_mode_changed)
 
 func _physics_process(delta):
 	spriteControl()
@@ -26,14 +26,12 @@ func _physics_process(delta):
 
 #Take damage and lose HP
 func takeDamage(damage):
-	print("took damage, my health is " + str(health))
 	health -= damage
 	if health <= 0:
 		die()
 
 #Die, delete self
 func die():
-	print(str(self) + "died")
 	queue_free()
 
 #Shoot at the player
@@ -60,12 +58,12 @@ func shoot():
 		
 
 #When changing to platformer mode become inactive
-func _on_control_mode_changed(_newControlMode):
-	if _newControlMode == Gamemanager.controlMode.PLATFORMER:
-		print("KILL MYSELF")
-	if _newControlMode == Gamemanager.controlMode.TOP_DOWN:
-		print("I SHOULD EXIST")
-	
+#func _on_control_mode_changed(_newControlMode):
+	#if _newControlMode == Gamemanager.controlMode.PLATFORMER:
+		#print("KILL MYSELF")
+	#if _newControlMode == Gamemanager.controlMode.TOP_DOWN:
+		#print("I SHOULD EXIST")
+	#
 
 func spriteControl():
 	face_sprite.rotation = rotation * -1
