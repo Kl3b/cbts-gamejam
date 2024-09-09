@@ -1,0 +1,70 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnow1nyrg548s"]
+
+[ext_resource type="PackedScene" uid="uid://buyretagrgoor" path="res://scenes/player.tscn" id="1_xsegb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3tauk"]
+size = Vector2(1084, 17)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_66rqq"]
+size = Vector2(108, 19)
+
+[node name="Leveltest" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="RigidBody2" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2"]
+position = Vector2(1, 257.5)
+shape = SubResource("RectangleShape2D_3tauk")
+
+[node name="Colour Rect" type="ColorRect" parent="RigidBody2"]
+offset_left = -540.0
+offset_top = 249.0
+offset_right = 544.0
+offset_bottom = 266.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="RigidBody" type="StaticBody2D" parent="."]
+position = Vector2(-237, 168)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody"]
+shape = SubResource("RectangleShape2D_66rqq")
+
+[node name="Colour Rect" type="ColorRect" parent="RigidBody"]
+offset_left = -54.0
+offset_top = -10.0
+offset_right = 54.0
+offset_bottom = 10.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="Player" parent="." instance=ExtResource("1_xsegb")]
+position = Vector2(-464, 141)
+jump_force = 2000
+gravity = 3000.0
+
+[node name="RigidBody3" type="StaticBody2D" parent="."]
+position = Vector2(-237, 168)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody3"]
+shape = SubResource("RectangleShape2D_66rqq")
+
+[node name="Colour Rect" type="ColorRect" parent="RigidBody3"]
+offset_left = -54.0
+offset_top = -10.0
+offset_right = 54.0
+offset_bottom = 10.0
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="RigidBody4" type="StaticBody2D" parent="."]
+position = Vector2(261, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody4"]
+shape = SubResource("RectangleShape2D_66rqq")
+
+[node name="Colour Rect" type="ColorRect" parent="RigidBody4"]
+offset_left = -54.0
+offset_top = -10.0
+offset_right = 54.0
+offset_bottom = 10.0
+color = Color(0.2, 0.2, 0.2, 1)
