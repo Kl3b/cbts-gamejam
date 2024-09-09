@@ -1,7 +1,7 @@
 extends Node
 
 enum controlMode {TOP_DOWN, PLATFORMER}
-var currentControlMode: int = controlMode.TOP_DOWN
+var currentControlMode: int = controlMode.PLATFORMER
 var Player: Node
 var PlayerHealth : int
 
@@ -16,7 +16,7 @@ signal control_mode_changed(newControlMode: controlMode)
 func connectToPlayer():
 	if Player:
 		Player.connect("took_damage", updateHealth)
-    Player.connect("collected_bonus_coin", updateCoins)
+		Player.connect("collected_bonus_coin", updateCoins)
 	
 	timer.one_shot = true
 	self.add_child(timer)
@@ -57,4 +57,3 @@ func _on_timer_timeout():
 func updateCoins():
 	bonusCoinsCollected += 1
 	print(bonusCoinsCollected)
-

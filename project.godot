@@ -11,9 +11,7 @@ config_version=5
 [application]
 
 config/name="calm-before-the-storm"
-
 run/main_scene="res://scenes/leveltest_2.tscn"
-
 config/features=PackedStringArray("4.3")
 config/icon="res://icon.svg"
 mainconfig/features=PackedStringArray("4.3", "Forward Plus")
@@ -24,6 +22,8 @@ Gamemanager="*res://scripts/gamemanager.gd"
 
 [display]
 
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 window/stretch/scale=1.2
 

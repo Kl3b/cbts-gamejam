@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dr1q470dimwow"]
+[gd_scene load_steps=4 format=3 uid="uid://do3rmhjoauurx"]
 
 [ext_resource type="Script" path="res://scripts/bonuscoin.gd" id="1_u8bpd"]
 [ext_resource type="Texture2D" uid="uid://fn275j1ocdh8" path="res://sprites/shapesspritesparts/tile_coin.png" id="2_f5ixc"]

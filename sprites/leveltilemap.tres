@@ -1,9 +1,9 @@
 [gd_resource type="TileSet" load_steps=7 format=3 uid="uid://djynnx2hpv88q"]
 
 [ext_resource type="Texture2D" uid="uid://cenee8186e2m0" path="res://sprites/spritesheet_default.png" id="1_m73es"]
-[ext_resource type="PackedScene" uid="uid://dr1q470dimwow" path="res://scenes/bonuscoin.tscn" id="2_gbspo"]
+[ext_resource type="PackedScene" uid="uid://do3rmhjoauurx" path="res://scenes/bonuscoin.tscn" id="2_gbspo"]
 [ext_resource type="PackedScene" uid="uid://dy6qoxg2nvjuf" path="res://scenes/enemy.tscn" id="3_vxi50"]
-[ext_resource type="PackedScene" uid="uid://dv7mshkb883gb" path="res://scenes/levelexit.tscn" id="4_ttui1"]
+[ext_resource type="PackedScene" uid="uid://b3ecl18yh7mpt" path="res://scenes/levelexit.tscn" id="4_ttui1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ins7u"]
 texture = ExtResource("1_m73es")

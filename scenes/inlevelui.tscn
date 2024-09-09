@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://ciuh78gjjiijy"]
+
+[ext_resource type="Script" path="res://scripts/inlevelui.gd" id="1_avvs6"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_xhadj"]
+
+[sub_resource type="MeshTexture" id="MeshTexture_k2xpq"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_avvs6")
+
+[node name="SwitchTimer" type="TextureProgressBar" parent="."]
+layout_direction = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -130.5
+offset_right = 130.5
+offset_bottom = 22.0
+grow_horizontal = 2
+step = 0.01
+nine_patch_stretch = true
+texture_under = SubResource("PlaceholderTexture2D_xhadj")
+texture_progress = SubResource("MeshTexture_k2xpq")
+tint_under = Color(1, 0.384314, 1, 0.188235)
+tint_progress = Color(0, 1, 0, 1)

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://buyretagrgoor" path="res://scenes/player.tscn" id="1_xsegb"]
 [ext_resource type="PackedScene" uid="uid://dy6qoxg2nvjuf" path="res://scenes/enemy.tscn" id="2_51u56"]
-[ext_resource type="PackedScene" uid="uid://dr1q470dimwow" path="res://scenes/bonuscoin.tscn" id="3_row8p"]
+[ext_resource type="PackedScene" uid="uid://do3rmhjoauurx" path="res://scenes/bonuscoin.tscn" id="3_row8p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_66rqq"]
 size = Vector2(108, 19)
