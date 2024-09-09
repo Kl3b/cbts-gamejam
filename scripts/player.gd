@@ -201,3 +201,8 @@ func takeDamage(dmg: int):
 	
 func spriteControl():
 	face_sprite.rotation = rotation * -1
+	
+signal collected_bonus_coin()
+func collectBonusCoin():
+	print("collected bonus coin")
+	collected_bonus_coin.emit()
