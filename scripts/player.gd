@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 
 
-
 #Testing
 @export var isPlatformerMode : bool = true
 @export var isMouseMode : bool = true
@@ -46,6 +45,23 @@ func platformer_mode(delta):
 	move_and_slide()
 
 func bullethell_mode(delta):
+	bulletHellMovement(delta)
+	shooting(delta)
+	
+func shooting(delta):
+	if Input.is_action_pressed("shoot") and fireRateTimer.is_stopped():
+		var firedBullet = bulletPrefab.instantiate()
+		firedBullet.myDamage = weaponDamage
+		firedBullet.global_position = firePoint.global_position
+		firedBullet.global_rotation = firePoint.global_rotation
+		
+		var direction = Vector2.RIGHT.rotated(global_rotation)
+		firedBullet.apply_impulse(direction * bulletSpeed)
+		
+		fireRateTimer.start()
+		get_tree().root.add_child(firedBullet)
+		
+func bulletHellMovement(delta):
 	var direction = Input.get_vector("left", "right", "up", "down")
 	if direction:
 		velocity = direction * SPEED
@@ -60,17 +76,4 @@ func bullethell_mode(delta):
 		var look_direction = Input.get_vector("look_left","look_right","look_up","look_down")
 		if look_direction.length() > 0:
 			rotation = look_direction.angle()
-	shooting(delta)
-func shooting(delta):
-	if Input.is_action_pressed("shoot") and fireRateTimer.is_stopped():
-		var firedBullet = bulletPrefab.instantiate()
-		firedBullet.myDamage = weaponDamage
-		firedBullet.global_position = firePoint.global_position
-		firedBullet.global_rotation = firePoint.global_rotation
-		
-		var direction = Vector2.RIGHT.rotated(global_rotation)
-		firedBullet.apply_impulse(direction * bulletSpeed)
-		
-		fireRateTimer.start()
-		get_tree().root.add_child(firedBullet)
-		
+	
