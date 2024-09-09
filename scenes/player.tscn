@@ -6,9 +6,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_622s0"]
 size = Vector2(125, 125)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_irvto")
-isPlatformerMode = false
 bulletSpeed = 500
 
 [node name="FirePoint" type="Node2D" parent="."]

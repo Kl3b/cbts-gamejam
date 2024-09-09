@@ -3,27 +3,25 @@ extends CharacterBody2D
 
 
 #Testing
-@export var isPlatformerMode : bool = true
 @export var isMouseMode : bool = true
 #Character control
 @export var fireRate : float = 0.2
 @export var weaponDamage : int = 50
 @export var bulletSpeed : int = 300
+@export var maxHealth : int = 100
+var health : int
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
-
+signal took_damage(newHP: int)
+signal player_ready()
 
 @export_group("Movement Type")
-@export var controlMode : int = 0
 
 #Nodes/Scenes
 @onready var firePoint = $FirePoint
 @onready var fireRateTimer = $FireRateTimer
 var bulletPrefab = preload("res://scenes/bullet.tscn")
-
-
-
 
 # Celeste does accel = 10xmax speed, decel = 20x max speed, jump to 3x sprite height
 @export_group("Movement Properties")
@@ -47,17 +45,23 @@ func _ready():
 	fireRateTimer.wait_time = fireRate
 	coyote_timer.wait_time = coyoteTime
 	jump_buffer_timer.wait_time = jumpBufferTime
+	Gamemanager.connect("control_mode_changed", on_control_mode_change)
+	Gamemanager.Player = self
+	Gamemanager.connectToPlayer()
+	Gamemanager.PlayerHealth = maxHealth
+	health = maxHealth
 
 func _physics_process(delta):
-	if Input.is_action_just_pressed("swap"):
-		isPlatformerMode = !isPlatformerMode
-		if isPlatformerMode == true:
-			rotation = 0
-	if isPlatformerMode == true:
+	if Gamemanager.currentControlMode == Gamemanager.controlMode.PLATFORMER:
 		platformer_mode(delta)
-	if isPlatformerMode == false:
+	if Gamemanager.currentControlMode == Gamemanager.controlMode.TOP_DOWN:
 		bullethell_mode(delta)
 		
+
+func on_control_mode_change(controlMode: Gamemanager.controlMode):
+	if controlMode == Gamemanager.controlMode.PLATFORMER:
+		print("reset rotation")
+		rotation = 0
 
 #func platformer_mode(delta):
 	# Handle falling
@@ -165,4 +169,11 @@ func bulletHellMovement(delta):
 		var look_direction = Input.get_vector("look_left","look_right","look_up","look_down")
 		if look_direction.length() > 0:
 			rotation = look_direction.angle()
+	
+func takeDamage(dmg: int):
+	print(health)
+	print(dmg)
+	health -= dmg
+	took_damage.emit(health)
+	print(Gamemanager.PlayerHealth)
 	

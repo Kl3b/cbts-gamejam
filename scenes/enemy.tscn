@@ -7,7 +7,7 @@
 radius = 77.24
 
 [node name="Enemy" type="RigidBody2D" groups=["enemy"]]
-collision_layer = 3
+collision_layer = 2
 collision_mask = 3
 mass = 1000.0
 gravity_scale = 0.0
@@ -21,3 +21,9 @@ shape = SubResource("CircleShape2D_8dh4k")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_onm1f")
 flip_v = true
+
+[node name="FireRate" type="Timer" parent="."]
+one_shot = true
+
+[node name="FirePointEnemy" type="Node2D" parent="."]
+position = Vector2(74, 0)
