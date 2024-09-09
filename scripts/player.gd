@@ -28,8 +28,8 @@ var bulletPrefab = preload("res://scenes/bullet.tscn")
 @export var acceleration : float = 5000
 @export var deceleration : float = 10000
 @export var top_speed : float = 500
-@export var jump_force : int
-@export var gravity : float = 50
+@export var jump_force : int = 2000
+@export var gravity : float = 3000
 var lowJumpMultiplier : float = 3
 var fallMultiplier : float = 3
 

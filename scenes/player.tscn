@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://covajcgitc3f" path="res://icon.svg" id="2_ee0oy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_622s0"]
-size = Vector2(125, 125)
+size = Vector2(125, 124)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_irvto")
@@ -14,7 +14,7 @@ bulletSpeed = 500
 position = Vector2(68, -1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.5, 1.5)
+position = Vector2(1.5, 1)
 shape = SubResource("RectangleShape2D_622s0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
