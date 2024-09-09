@@ -4,8 +4,11 @@ enum controlMode {TOP_DOWN, PLATFORMER}
 var currentControlMode: int = controlMode.TOP_DOWN
 var Player: Node
 var PlayerHealth : int
+
 var switchTime = 3
 var timer = Timer.new()
+var bonusCoinsCollected : int
+
 
 signal control_mode_changed(newControlMode: controlMode)
 
@@ -13,10 +16,14 @@ signal control_mode_changed(newControlMode: controlMode)
 func connectToPlayer():
 	if Player:
 		Player.connect("took_damage", updateHealth)
+    Player.connect("collected_bonus_coin", updateCoins)
 	
 	timer.one_shot = true
 	self.add_child(timer)
 	timer.start(switchTime)
+
+
+		
 
 func _process(delta):
 	#print(timer.time_left)
@@ -37,6 +44,7 @@ func swapControlModes(_currentControlMode: controlMode):
 
 func updateHealth(health):
 	PlayerHealth = health
+
 	
 func _on_timer_timeout():
 	print("timeout")
@@ -44,3 +52,9 @@ func _on_timer_timeout():
 
 
 	
+
+
+func updateCoins():
+	bonusCoinsCollected += 1
+	print(bonusCoinsCollected)
+

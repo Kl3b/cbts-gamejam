@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://n35dne3t61x7"]
+
+[ext_resource type="Texture2D" uid="uid://cenee8186e2m0" path="res://sprites/spritesheet_default.png" id="1_pjyn4"]
+[ext_resource type="PackedScene" uid="uid://dr1q470dimwow" path="res://scenes/bonuscoin.tscn" id="2_mm5e1"]
+[ext_resource type="PackedScene" uid="uid://dy6qoxg2nvjuf" path="res://scenes/enemy.tscn" id="3_tso55"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ins7u"]
+texture = ExtResource("1_pjyn4")
+margins = Vector2i(0, 3)
+texture_region_size = Vector2i(4, 4)
+0:116/size_in_atlas = Vector2i(20, 20)
+0:116/0 = 0
+20:126/size_in_atlas = Vector2i(20, 10)
+20:126/0 = 0
+20:116/size_in_atlas = Vector2i(20, 10)
+20:116/0 = 0
+20:106/size_in_atlas = Vector2i(20, 10)
+20:106/0 = 0
+20:96/size_in_atlas = Vector2i(20, 10)
+20:96/0 = 0
+20:76/size_in_atlas = Vector2i(20, 20)
+20:76/0 = 0
+40:79/size_in_atlas = Vector2i(20, 20)
+40:79/0 = 0
+60:19/size_in_atlas = Vector2i(20, 20)
+60:19/0 = 0
+113:132/size_in_atlas = Vector2i(10, 10)
+113:132/0 = 0
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_6qc1j"]
+scenes/1/scene = ExtResource("2_mm5e1")
+scenes/2/scene = ExtResource("3_tso55")
+
+[sub_resource type="TileSet" id="TileSet_tbo36"]
+physics_layer_0/collision_layer = 1
+sources/2 = SubResource("TileSetAtlasSource_ins7u")
+sources/3 = SubResource("TileSetScenesCollectionSource_6qc1j")
+
+[node name="TileMapLayer" type="TileMapLayer"]
+tile_set = SubResource("TileSet_tbo36")

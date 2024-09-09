@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dnow1nyrg548s"]
+[gd_scene load_steps=6 format=3 uid="uid://dnow1nyrg548s"]
 
 [ext_resource type="PackedScene" uid="uid://buyretagrgoor" path="res://scenes/player.tscn" id="1_xsegb"]
 [ext_resource type="PackedScene" uid="uid://dy6qoxg2nvjuf" path="res://scenes/enemy.tscn" id="2_51u56"]
+[ext_resource type="PackedScene" uid="uid://dr1q470dimwow" path="res://scenes/bonuscoin.tscn" id="3_row8p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_66rqq"]
 size = Vector2(108, 19)
@@ -29,8 +30,6 @@ color = Color(0.2, 0.2, 0.2, 1)
 
 [node name="Player" parent="." instance=ExtResource("1_xsegb")]
 position = Vector2(-476, 150)
-jump_force = 2000
-gravity = 3000.0
 
 [node name="RigidBody3" type="StaticBody2D" parent="."]
 position = Vector2(-237, 168)
@@ -70,3 +69,6 @@ position = Vector2(-426, -230)
 
 [node name="Enemy2" parent="." instance=ExtResource("2_51u56")]
 position = Vector2(-172, -243)
+
+[node name="bonuscoin" parent="." instance=ExtResource("3_row8p")]
+position = Vector2(-94, 236)
