@@ -1,25 +1,64 @@
-[gd_scene load_steps=4 format=3 uid="uid://buyretagrgoor"]
+[gd_scene load_steps=9 format=3 uid="uid://buyretagrgoor"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_irvto"]
-[ext_resource type="Texture2D" uid="uid://covajcgitc3f" path="res://icon.svg" id="2_ee0oy"]
+[ext_resource type="Texture2D" uid="uid://de0ra3x8ijjn8" path="res://sprites/shapesspritesparts/green_body_square.png" id="2_8hyvm"]
+[ext_resource type="Texture2D" uid="uid://c2u856vvyqc18" path="res://sprites/shapesspritesparts/face_a.png" id="3_q4kdj"]
+[ext_resource type="Texture2D" uid="uid://g2dn1t3igm48" path="res://sprites/shapesspritesparts/face_c.png" id="4_2cvqa"]
+[ext_resource type="Texture2D" uid="uid://bax1cpbwldlsb" path="res://sprites/shapesspritesparts/green_hand_point.png" id="5_3ftst"]
+[ext_resource type="Texture2D" uid="uid://dk8h53xfev7ys" path="res://sprites/shapesspritesparts/face_g.png" id="5_5jqm7"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_agqgt"]
-radius = 76.99
+[sub_resource type="SpriteFrames" id="SpriteFrames_5bmnh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_q4kdj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_2cvqa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_5jqm7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_622s0"]
+size = Vector2(79, 67)
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_irvto")
-isPlatformerMode = false
-isMouseMode = false
 bulletSpeed = 500
 
 [node name="FirePoint" type="Node2D" parent="."]
 position = Vector2(68, -1)
 
+[node name="BodySprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_8hyvm")
+region_rect = Rect2(240, 160, 80, 80)
+
+[node name="FaceSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5bmnh")
+frame_progress = 0.0838424
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_agqgt")
+position = Vector2(0.5, 4.5)
+shape = SubResource("RectangleShape2D_622s0")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_ee0oy")
+[node name="HandSprite" type="Sprite2D" parent="."]
+position = Vector2(55, -1.90735e-06)
+rotation = 0.685658
+texture = ExtResource("5_3ftst")
+region_rect = Rect2(491, 390, 34, 36)
+region_filter_clip_enabled = true
 
-[node name="Timer" type="Timer" parent="."]
+[node name="CoyoteTimer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
+[node name="FireRateTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="JumpBufferTimer" type="Timer" parent="."]
 one_shot = true
