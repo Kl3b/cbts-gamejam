@@ -25,7 +25,6 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_622s0"]
-
 size = Vector2(79, 67)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]

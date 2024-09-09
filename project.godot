@@ -12,9 +12,9 @@ config_version=5
 
 config/name="calm-before-the-storm"
 run/main_scene="res://scenes/leveltest.tscn"
-main
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.3")
 config/icon="res://icon.svg"
+mainconfig/features=PackedStringArray("4.3", "Forward Plus")
 
 [autoload]
 

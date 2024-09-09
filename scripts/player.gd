@@ -55,10 +55,8 @@ func _ready():
 	health = maxHealth
 	match Gamemanager.currentControlMode:
 		Gamemanager.controlMode.TOP_DOWN:
-			print("starting in top down")
 			face_sprite.frame = 2
 		Gamemanager.controlMode.PLATFORMER:
-			print("starting in platformer")
 			face_sprite.frame = 0
 
 func _physics_process(delta):
@@ -73,7 +71,7 @@ func on_control_mode_change(controlMode: Gamemanager.controlMode):
 	if controlMode == Gamemanager.controlMode.PLATFORMER:
 		coyote_timer.stop()
 		jump_buffer_timer.stop()
-		print("reset rotation")
+		#print("reset rotation")
 		rotation = 0
 		face_sprite.rotation = 0
 	if controlMode == Gamemanager.controlMode.TOP_DOWN:
@@ -193,11 +191,8 @@ func bulletHellMovement(delta):
 	spriteControl()
 	
 func takeDamage(dmg: int):
-	print(health)
-	print(dmg)
 	health -= dmg
 	took_damage.emit(health)
-	print(Gamemanager.PlayerHealth)
 	
 func spriteControl():
 	face_sprite.rotation = rotation * -1
