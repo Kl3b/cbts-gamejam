@@ -28,7 +28,9 @@ offset_bottom = 10.0
 color = Color(0.2, 0.2, 0.2, 1)
 
 [node name="Player" parent="." instance=ExtResource("1_xsegb")]
-position = Vector2(-464, 141)
+position = Vector2(-476, 150)
+jump_force = 2000
+gravity = 3000.0
 
 [node name="RigidBody3" type="StaticBody2D" parent="."]
 position = Vector2(-237, 168)
@@ -64,7 +66,7 @@ color = Color(0.2, 0.2, 0.2, 1)
 shape = SubResource("WorldBoundaryShape2D_ipegn")
 
 [node name="Enemy" parent="." instance=ExtResource("2_51u56")]
-position = Vector2(-439, -243)
+position = Vector2(-426, -230)
 
 [node name="Enemy2" parent="." instance=ExtResource("2_51u56")]
 position = Vector2(-172, -243)

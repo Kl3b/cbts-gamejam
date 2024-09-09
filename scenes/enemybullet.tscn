@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://4x81le8mbb83"]
 
 [ext_resource type="Script" path="res://scripts/enemybullet.gd" id="1_45eab"]
-[ext_resource type="Texture2D" uid="uid://covajcgitc3f" path="res://icon.svg" id="2_2bcip"]
+[ext_resource type="Texture2D" uid="uid://cbame3xpbs3kj" path="res://sprites/shapesspritesparts/tile_background_tree_large.png" id="2_0g0d7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a0ltb"]
 radius = 11.0
@@ -21,8 +21,9 @@ shape = SubResource("CapsuleShape2D_a0ltb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1, 1)
-scale = Vector2(0.804688, 0.164062)
-texture = ExtResource("2_2bcip")
+rotation = 1.57079
+scale = Vector2(0.233, 0.762)
+texture = ExtResource("2_0g0d7")
 
 [node name="Deletion Timer" type="Timer" parent="."]
 wait_time = 5.0

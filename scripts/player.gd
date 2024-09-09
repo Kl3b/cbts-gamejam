@@ -40,6 +40,9 @@ var has_jumped : bool = false
 @export var jumpBufferTime : float = 0.1
 @onready var jump_buffer_timer = $JumpBufferTimer
 
+#Sprites
+@onready var face_sprite = $FaceSprite
+@onready var hand_sprite = $HandSprite
 
 func _ready():
 	fireRateTimer.wait_time = fireRate
@@ -50,6 +53,13 @@ func _ready():
 	Gamemanager.connectToPlayer()
 	Gamemanager.PlayerHealth = maxHealth
 	health = maxHealth
+	match Gamemanager.currentControlMode:
+		Gamemanager.controlMode.TOP_DOWN:
+			print("starting in top down")
+			face_sprite.frame = 2
+		Gamemanager.controlMode.PLATFORMER:
+			print("starting in platformer")
+			face_sprite.frame = 0
 
 func _physics_process(delta):
 	if Gamemanager.currentControlMode == Gamemanager.controlMode.PLATFORMER:
@@ -59,9 +69,15 @@ func _physics_process(delta):
 		
 
 func on_control_mode_change(controlMode: Gamemanager.controlMode):
+	#reset all coyote/buffer timers to avoid issues
 	if controlMode == Gamemanager.controlMode.PLATFORMER:
+		coyote_timer.stop()
+		jump_buffer_timer.stop()
 		print("reset rotation")
 		rotation = 0
+		face_sprite.rotation = 0
+	if controlMode == Gamemanager.controlMode.TOP_DOWN:
+		face_sprite.frame = 2
 
 #func platformer_mode(delta):
 	# Handle falling
@@ -77,8 +93,10 @@ func platformerMovement(delta):
 	#Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+		face_sprite.frame = 1
 	#We are on the floor, therefore we reset the coyote timer running and check for buffered jumps
 	else:
+		face_sprite.frame = 0
 		coyote_timer.start()
 		#If there has been a jump input in the last bufferTime seconds, we will jump
 		if not jump_buffer_timer.is_stopped():
@@ -97,7 +115,7 @@ func platformerMovement(delta):
 	if velocity.y < 0:
 		# If we are moving upwards
 		velocity.y += gravity * (fallMultiplier - 1) * delta
-	elif velocity.y > 0 and not Input.is_action_pressed("jump"):
+	elif velocity.y < 0 and not Input.is_action_pressed("jump"):
 		# if we are moving downwards and not holding jump?
 		velocity.y += gravity * (lowJumpMultiplier-1) * delta
 	
@@ -154,6 +172,9 @@ func shooting(delta):
 		fireRateTimer.start()
 		get_tree().root.add_child(firedBullet)
 		
+var center_point = position
+var radius = 40
+
 func bulletHellMovement(delta):
 	var direction = Input.get_vector("left", "right", "up", "down")
 	if direction:
@@ -168,7 +189,8 @@ func bulletHellMovement(delta):
 	else:
 		var look_direction = Input.get_vector("look_left","look_right","look_up","look_down")
 		if look_direction.length() > 0:
-			rotation = look_direction.angle()
+			hand_sprite.rotation = look_direction.angle()
+	spriteControl()
 	
 func takeDamage(dmg: int):
 	print(health)
@@ -177,3 +199,5 @@ func takeDamage(dmg: int):
 	took_damage.emit(health)
 	print(Gamemanager.PlayerHealth)
 	
+func spriteControl():
+	face_sprite.rotation = rotation * -1
