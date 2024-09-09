@@ -28,8 +28,16 @@ color = Color(0.2, 0.2, 0.2, 1)
 
 [node name="Player" parent="." instance=ExtResource("1_xsegb")]
 position = Vector2(-464, 141)
+isMouseMode = null
+fireRate = null
+weaponDamage = null
+controlMode = null
+acceleration = null
+deceleration = null
+top_speed = null
 jump_force = 2000
 gravity = 3000.0
+coyoteTime = null
 
 [node name="RigidBody3" type="StaticBody2D" parent="."]
 position = Vector2(-237, 168)

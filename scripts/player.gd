@@ -19,11 +19,9 @@ const JUMP_VELOCITY = -400.0
 
 #Nodes/Scenes
 @onready var firePoint = $FirePoint
-@onready var fireRateTimer = $Timer
+@onready var fireRateTimer = $FireRateTimer
 var bulletPrefab = preload("res://scenes/bullet.tscn")
 
-func _ready():
-	fireRateTimer.wait_time = fireRate
 
 
 
@@ -37,52 +35,64 @@ func _ready():
 var lowJumpMultiplier : float = 3
 var fallMultiplier : float = 3
 
-var coyoteTime : float = 2.0
-var coyoteTimer : float = 2.0
+@export var coyoteTime : float = 2.0
+@onready var coyote_timer = $CoyoteTimer
 var has_jumped : bool = false
 
+@export var jumpBufferTime : float = 0.1
+@onready var jump_buffer_timer = $JumpBufferTimer
+
+
+func _ready():
+	fireRateTimer.wait_time = fireRate
+	coyote_timer.wait_time = coyoteTime
+	jump_buffer_timer.wait_time = jumpBufferTime
 
 func _physics_process(delta):
 	if Input.is_action_just_pressed("swap"):
 		isPlatformerMode = !isPlatformerMode
+		if isPlatformerMode == true:
+			rotation = 0
 	if isPlatformerMode == true:
 		platformer_mode(delta)
 	if isPlatformerMode == false:
 		bullethell_mode(delta)
-	
-
-func can_jump(delta):
-	if is_on_floor():
-		has_jumped = false
-		coyoteTimer = coyoteTime
-		return true
-	elif coyoteTimer > 0 and not has_jumped:
-		coyoteTimer -= delta
-		return true
-	else:
-		return false
 		
-	
-func platformer_mode(delta):
+
+#func platformer_mode(delta):
 	# Handle falling
-	velocity.y += gravity * delta
+	#velocity.y += gravity * delta
 
 	# All of this handles jumping. I don't like it at the moment.
 
 func platformer_mode(delta):
-		# Add the gravity.
+	platformerMovement(delta)
+	
+	
+func platformerMovement(delta):
+	#Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-	# Handle jump.
-
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = -jump_force
-		has_jumped = true
-
+	#We are on the floor, therefore we reset the coyote timer running and check for buffered jumps
+	else:
+		coyote_timer.start()
+		#If there has been a jump input in the last bufferTime seconds, we will jump
+		if not jump_buffer_timer.is_stopped():
+			print("buffered a jump")
+			jump()
+			jump_buffer_timer.stop()
+	
+	#Check for jump input
+	if Input.is_action_just_pressed("jump"):
+		#Start the buffer timer when jump is input
+		jump_buffer_timer.start()
+		if can_jump():
+			jump()
+	
+	#Something fucky is going on with this, you fall slower if you hold space
 	if velocity.y < 0:
 		# If we are moving upwards
 		velocity.y += gravity * (fallMultiplier - 1) * delta
-
 	elif velocity.y > 0 and not Input.is_action_pressed("jump"):
 		# if we are moving downwards and not holding jump?
 		velocity.y += gravity * (lowJumpMultiplier-1) * delta
@@ -100,24 +110,43 @@ func platformer_mode(delta):
 
 	move_and_slide()
 	
-#func can_jump():
-	
-#func jump(_delta)
+#Jump function, stop the coyote timer after we've jumped.
+func jump():
+	velocity.y = -jump_force
+	coyote_timer.stop()
+
+#Function to check if we can jump
+func can_jump():
+	#If we are on the floor we can perform a normal jump
+	if is_on_floor():
+		print("normal floor jump!")
+		return true
+	#If we're not on the floor, but the coyote timer is running, we can coyote jump
+	elif not coyote_timer.is_stopped() and not is_on_floor():
+		print("Coyote time jump!")  
+		return true
+	#If none of the above is true we can't jump
+	return false
 
 func bullethell_mode(delta):
 	bulletHellMovement(delta)
 	shooting(delta)
 	
 func shooting(delta):
+	#Check for shooting input
 	if Input.is_action_pressed("shoot") and fireRateTimer.is_stopped():
+		#Instantiate a new bullet
 		var firedBullet = bulletPrefab.instantiate()
+		#Tell that bullet its damage, and ensure its firing from the right location
 		firedBullet.myDamage = weaponDamage
 		firedBullet.global_position = firePoint.global_position
 		firedBullet.global_rotation = firePoint.global_rotation
 		
+		#Apply an impulse force in the bullets fired direction
 		var direction = Vector2.RIGHT.rotated(global_rotation)
 		firedBullet.apply_impulse(direction * bulletSpeed)
 		
+		#Start timer for fire rate
 		fireRateTimer.start()
 		get_tree().root.add_child(firedBullet)
 		
