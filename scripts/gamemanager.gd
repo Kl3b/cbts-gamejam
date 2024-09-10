@@ -13,6 +13,7 @@ var PlayerScn = preload("res://scenes/player.tscn")
 var switchTime = 3
 var switchTimer = Timer.new()
 var bonusCoinsCollected : int
+var switchAutomatically : bool = true
 
 signal control_mode_changed(newControlMode: controlMode)
 
@@ -51,8 +52,9 @@ func swapTimer():
 func _process(delta):
 	#print(timer.time_left)
 	if Input.is_action_just_pressed("swap"):
-		currentControlMode = swapControlModes(currentControlMode)
-	if switchTimer.time_left == 0:
+		#currentControlMode = swapControlModes(currentControlMode)
+		switchAutomatically = !switchAutomatically
+	if switchTimer.time_left == 0 and switchAutomatically:
 		currentControlMode = swapControlModes(currentControlMode)
 		switchTimer.start(3)
 		

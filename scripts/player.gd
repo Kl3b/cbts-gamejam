@@ -16,7 +16,11 @@ const JUMP_VELOCITY = -400.0
 signal took_damage(newHP: int)
 signal player_ready()
 
-@export_group("Movement Type")
+@export_group("Jump Properties")
+@export var jump_force : int = 1000
+@export var gravity : float = 4000
+@export var lowJumpMultiplier : float = 2
+@export var fallMultiplier : float = 2.5
 
 #Nodes/Scenes
 @onready var firePoint = $FirePoint
@@ -28,10 +32,8 @@ var bulletPrefab = preload("res://scenes/bullet.tscn")
 @export var acceleration : float = 5000
 @export var deceleration : float = 10000
 @export var top_speed : float = 500
-@export var jump_force : int = 1000
-@export var gravity : float = 4000
-var lowJumpMultiplier : float = 2
-var fallMultiplier : float = 2.5
+
+
 
 @export var coyoteTime : float = 2.0
 @onready var coyote_timer = $CoyoteTimer
@@ -93,7 +95,6 @@ func platformerMovement(delta):
 		coyote_timer.start()
 		#If there has been a jump input in the last bufferTime seconds, we will jump
 		if not jump_buffer_timer.is_stopped():
-			print("buffered a jump")
 			jump()
 			jump_buffer_timer.stop()
 	
@@ -104,14 +105,12 @@ func platformerMovement(delta):
 		if can_jump():
 			jump()
 	
-	print(velocity.y)
-	#Something fucky is going on with this, you fall slower if you hold space
 	if velocity.y > 0:
-		# If we are moving upwards
-		velocity.y += gravity * (fallMultiplier - 1) * delta
+		# If we are moving downwards
+		velocity.y += gravity * (fallMultiplier) * delta
 	elif velocity.y < 0 and not Input.is_action_pressed("jump"):
-		# if we are moving downwards and not holding jump?
-		velocity.y += gravity * (lowJumpMultiplier-1) * delta
+		# if we are moving upwards and not holding jump, turn up gravity.
+		velocity.y += gravity * (lowJumpMultiplier) * delta
 	
 	# Get user input
 	var input_vector = Vector2.ZERO
@@ -135,11 +134,9 @@ func jump():
 func can_jump():
 	#If we are on the floor we can perform a normal jump
 	if is_on_floor():
-		print("normal floor jump!")
 		return true
 	#If we're not on the floor, but the coyote timer is running, we can coyote jump
 	elif not coyote_timer.is_stopped() and not is_on_floor():
-		print("Coyote time jump!")  
 		return true
 	#If none of the above is true we can't jump
 	return false
