@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbqffyo8xqxqs"]
+
+[ext_resource type="Script" path="res://scripts/openable_door.gd" id="1_3d8g6"]
+[ext_resource type="Texture2D" uid="uid://de0ra3x8ijjn8" path="res://sprites/shapesspritesparts/green_body_square.png" id="2_l8453"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y08qy"]
+size = Vector2(80.759, 76)
+
+[node name="OpenableDoor" type="Sprite2D"]
+position = Vector2(-1.5, 0)
+scale = Vector2(6.5875, 1)
+texture = ExtResource("2_l8453")
+script = ExtResource("1_3d8g6")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1.13851, -1)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_y08qy")

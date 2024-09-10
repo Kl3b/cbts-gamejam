@@ -1,7 +1,6 @@
-extends RigidBody2D
+extends EnemyBase
 
 @export var fireRate : float = 2.5
-@export var health : int = 100
 @export var weaponDamage: int = 100
 @export var bulletSpeed: float = 200
 @onready var firePoint = $FirePointEnemy
@@ -23,16 +22,6 @@ func _physics_process(delta):
 	spriteControl()
 	if Player != null and Gamemanager.currentControlMode == Gamemanager.controlMode.TOP_DOWN:
 		targetPlayer()
-
-#Take damage and lose HP
-func takeDamage(damage):
-	health -= damage
-	if health <= 0:
-		die()
-
-#Die, delete self
-func die():
-	queue_free()
 
 #Shoot at the player
 func targetPlayer():
@@ -63,7 +52,7 @@ func shoot():
 		#print("KILL MYSELF")
 	#if _newControlMode == Gamemanager.controlMode.TOP_DOWN:
 		#print("I SHOULD EXIST")
-	#
+	
 
 func spriteControl():
 	face_sprite.rotation = rotation * -1
