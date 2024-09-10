@@ -28,10 +28,10 @@ var bulletPrefab = preload("res://scenes/bullet.tscn")
 @export var acceleration : float = 5000
 @export var deceleration : float = 10000
 @export var top_speed : float = 500
-@export var jump_force : int = 2000
-@export var gravity : float = 3000
-var lowJumpMultiplier : float = 3
-var fallMultiplier : float = 3
+@export var jump_force : int = 1000
+@export var gravity : float = 4000
+var lowJumpMultiplier : float = 2
+var fallMultiplier : float = 2.5
 
 @export var coyoteTime : float = 2.0
 @onready var coyote_timer = $CoyoteTimer
@@ -77,16 +77,11 @@ func on_control_mode_change(controlMode: Gamemanager.controlMode):
 	if controlMode == Gamemanager.controlMode.TOP_DOWN:
 		face_sprite.frame = 2
 
-#func platformer_mode(delta):
-	# Handle falling
-	#velocity.y += gravity * delta
-
-	# All of this handles jumping. I don't like it at the moment.
 
 func platformer_mode(delta):
 	platformerMovement(delta)
 	
-	
+
 func platformerMovement(delta):
 	#Add the gravity.
 	if not is_on_floor():
@@ -109,8 +104,9 @@ func platformerMovement(delta):
 		if can_jump():
 			jump()
 	
+	print(velocity.y)
 	#Something fucky is going on with this, you fall slower if you hold space
-	if velocity.y < 0:
+	if velocity.y > 0:
 		# If we are moving upwards
 		velocity.y += gravity * (fallMultiplier - 1) * delta
 	elif velocity.y < 0 and not Input.is_action_pressed("jump"):
