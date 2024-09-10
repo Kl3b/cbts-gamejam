@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://v8fd3xbphgv"]
+
+[ext_resource type="Script" path="res://openable_door_manager.gd" id="1_l2qm5"]
+
+[node name="openable_door_controller" type="Node2D"]
+script = ExtResource("1_l2qm5")

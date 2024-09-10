@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://tcfgqdcseppb"]
+
+[ext_resource type="Script" path="res://scripts/door_button.gd" id="1_l7po8"]
+[ext_resource type="Texture2D" uid="uid://cwotadowg43ia" path="res://sprites/shapesspritesparts/green_body_circle.png" id="2_5bht6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x7bpj"]
+radius = 49.0102
+
+[node name="door_button" type="Node2D"]
+script = ExtResource("1_l7po8")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_x7bpj")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+texture = ExtResource("2_5bht6")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]

@@ -4,13 +4,15 @@ enum controlMode {TOP_DOWN, PLATFORMER}
 var currentControlMode: int = controlMode.PLATFORMER
 var Player: Node
 var PlayerHealth : int
+var CurrentLevel : Node
+var CurrentLevelNumber : int
+var CompletedLevels : Array[int]
 
 var PlayerScn = preload("res://scenes/player.tscn")
 
 var switchTime = 3
-var timer = Timer.new()
+var switchTimer = Timer.new()
 var bonusCoinsCollected : int
-
 
 signal control_mode_changed(newControlMode: controlMode)
 
@@ -23,27 +25,36 @@ func connectToPlayer():
 	
 
 func _ready():
+	CurrentLevelNumber = 1
+	getLevelData()
 	createBulletContainer()
+	self.add_child(switchTimer)
 	swapTimer()
+
+func getLevelData():
+	CurrentLevel = LevelManager.currentLevel
+	print(CurrentLevel)
+	print(LevelManager.currentLevel)
+	if LevelManager.currentLevel.is_in_group("level"):
+		CurrentLevelNumber = LevelManager.getLevelNumber(LevelManager.currentLevel)
 
 var bulletContainer : Node2D
 func createBulletContainer():
 	bulletContainer = Node2D.new()
 	bulletContainer.name = "BulletContainer"
-	get_tree().root.add_child.call_deferred(bulletContainer)
+	CurrentLevel.add_child(bulletContainer)
 
 func swapTimer():
-	timer.one_shot = true
-	self.add_child(timer)
-	timer.start(switchTime)
+	switchTimer.one_shot = true
+	switchTimer.start(switchTime)
 
 func _process(delta):
 	#print(timer.time_left)
 	if Input.is_action_just_pressed("swap"):
 		currentControlMode = swapControlModes(currentControlMode)
-	if timer.time_left == 0:
+	if switchTimer.time_left == 0:
 		currentControlMode = swapControlModes(currentControlMode)
-		timer.start(3)
+		switchTimer.start(3)
 		
 func swapControlModes(_currentControlMode: controlMode):
 	var _newControlMode
@@ -57,14 +68,21 @@ func swapControlModes(_currentControlMode: controlMode):
 func updateHealth(health):
 	PlayerHealth = health
 
-	
 func _on_timer_timeout():
 	print("timeout")
 
 func playerDied():
-	pass
-	
-	
+	LevelManager.goToLevel(CurrentLevelNumber)
+	swapTimer()
+	currentControlMode = controlMode.PLATFORMER
+
 func updateCoins():
 	bonusCoinsCollected += 1
 	print(bonusCoinsCollected)
+
+
+func exitReached():
+	CompletedLevels.append(CurrentLevelNumber)
+	CurrentLevelNumber += 1
+	currentControlMode = controlMode.PLATFORMER
+	LevelManager.goToLevel(CurrentLevelNumber)
