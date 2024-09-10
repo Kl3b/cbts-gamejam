@@ -61,6 +61,7 @@ func _process(delta):
 func swapControlModes(_currentControlMode: controlMode):
 	var _newControlMode
 	if _currentControlMode == controlMode.TOP_DOWN:
+		clearAllBullets()
 		_newControlMode = controlMode.PLATFORMER
 	else:
 		_newControlMode = controlMode.TOP_DOWN
@@ -88,3 +89,8 @@ func exitReached():
 	CurrentLevelNumber += 1
 	currentControlMode = controlMode.PLATFORMER
 	LevelManager.goToLevel(CurrentLevelNumber)
+
+func clearAllBullets():
+	if bulletContainer:
+		for bullet in bulletContainer.get_children():
+			bullet.queue_free()

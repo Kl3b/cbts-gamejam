@@ -8,12 +8,14 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_o3cjt"]
 radius = 60.0
 
-[node name="RigidBody2D" type="RigidBody2D" groups=["enemy"]]
-collision_layer = 3
+[node name="spike_enemy" type="RigidBody2D" groups=["enemy"]]
+collision_layer = 2
 collision_mask = 3
 gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 4
 script = ExtResource("1_datu5")
-health = 50
+health = 25
 
 [node name="Spikes" type="Node2D" parent="."]
 
