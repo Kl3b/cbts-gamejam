@@ -24,11 +24,14 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_622s0"]
-size = Vector2(79, 67)
+[sub_resource type="CircleShape2D" id="CircleShape2D_q064q"]
+radius = 35.5317
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_irvto")
+bulletSpeed = 1000
+topDownMoveSpeed = 350.0
+coyoteTime = 0.15
 
 [node name="FirePoint" type="Node2D" parent="."]
 position = Vector2(68, -1)
@@ -39,11 +42,9 @@ region_rect = Rect2(240, 160, 80, 80)
 
 [node name="FaceSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5bmnh")
-frame_progress = 0.0838424
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 4.5)
-shape = SubResource("RectangleShape2D_622s0")
+shape = SubResource("CircleShape2D_q064q")
 
 [node name="HandSprite" type="Sprite2D" parent="."]
 position = Vector2(55, -1.90735e-06)

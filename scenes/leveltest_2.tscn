@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ciuh78gjjiijy" path="res://scenes/inlevelui.tscn" id="3_ws564"]
 
 [node name="leveltest2" type="Node2D"]
+position = Vector2(1016, 476)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(-553, -308)
@@ -13,8 +14,9 @@ tile_set = ExtResource("1_vef3c")
 
 [node name="Player" parent="." instance=ExtResource("2_714s2")]
 position = Vector2(-1145, 474)
+isMouseMode = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.4, 0.4)
+zoom = Vector2(0.6, 0.6)
 
 [node name="Control" parent="." instance=ExtResource("3_ws564")]

@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=4 uid="uid://c3cj3xuswbhhl"]
+
+[ext_resource type="TileSet" uid="uid://djynnx2hpv88q" path="res://sprites/leveltilemap.tres" id="1_m8npe"]
+[ext_resource type="PackedScene" uid="uid://buyretagrgoor" path="res://scenes/player.tscn" id="2_ealva"]
+[ext_resource type="PackedScene" uid="uid://ciuh78gjjiijy" path="res://scenes/inlevelui.tscn" id="3_3s21p"]
+
+[node name="testlevel2" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAACACMAAgAUAEwAAAAHACMAAgAoAE8AAAAMACMAAgAoAE8AAAARACMAAgAoAE8AAAAWACMAAgAoAE8AAAAbACMAAgAoAE8AAAAgACMAAgAAAHQAAAA3ACMAAgA8ABMAAAA3ACgAAgA8ABMAAAA3AC0AAgA8ABMAAAA3ADIAAgA8ABMAAAA8ADIAAgA8ABMAAAA8AC0AAgA8ABMAAAA8ACgAAgA8ABMAAAA8ACMAAgA8ABMAAABBACMAAgA8ABMAAAA8AB4AAgA8ABMAAAA8ABkAAgA8ABMAAAA8ABQAAgA8ABMAAAA8AA8AAgA8ABMAAAA8AAoAAgA8ABMAAAA8AAUAAgA8ABMAAABBACgAAgA8ABMAAABBAC0AAgA8ABMAAABBADIAAgA8ABMAAABXACMAAgAUAEwAAABcACMAAgAoAE8AAABhACMAAgAoAE8AAABmACMAAgAoAE8AAABrACMAAgAoAE8AAABwACMAAgAoAE8AAAB1ACMAAgAAAHQAAAADAD8AAwAAAAAAAgAiAD8AAwAAAAAAAgA8AD4AAwAAAAAAAgByAD4AAwAAAAAAAgBcAD8AAwAAAAAAAgA=")
+tile_set = ExtResource("1_m8npe")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(965, 464)
+zoom = Vector2(0.6, 0.6)
+
+[node name="CanvasLayer" parent="." instance=ExtResource("3_3s21p")]
+
+[node name="Player" parent="." instance=ExtResource("2_ealva")]
+position = Vector2(97, 421)

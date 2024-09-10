@@ -21,7 +21,7 @@ func _ready():
 
 func _physics_process(delta):
 	spriteControl()
-	if Player and Gamemanager.currentControlMode == Gamemanager.controlMode.TOP_DOWN:
+	if Player != null and Gamemanager.currentControlMode == Gamemanager.controlMode.TOP_DOWN:
 		targetPlayer()
 
 #Take damage and lose HP
@@ -54,7 +54,7 @@ func shoot():
 		
 		#Start timer for fire rate
 		fire_rate_timer.start()
-		get_tree().root.add_child(firedBullet)
+		Gamemanager.bulletContainer.add_child(firedBullet)
 		
 
 #When changing to platformer mode become inactive

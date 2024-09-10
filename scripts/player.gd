@@ -10,7 +10,7 @@ extends CharacterBody2D
 @export var bulletSpeed : int = 300
 @export var maxHealth : int = 100
 var health : int
-const SPEED = 300.0
+@export var topDownMoveSpeed = 300.0
 const JUMP_VELOCITY = -400.0
 
 signal took_damage(newHP: int)
@@ -168,7 +168,7 @@ func shooting(delta):
 		
 		#Start timer for fire rate
 		fireRateTimer.start()
-		get_tree().root.add_child(firedBullet)
+		Gamemanager.bulletContainer.add_child(firedBullet)
 		
 var center_point = position
 var radius = 40
@@ -176,10 +176,10 @@ var radius = 40
 func bulletHellMovement(delta):
 	var direction = Input.get_vector("left", "right", "up", "down")
 	if direction:
-		velocity = direction * SPEED
+		velocity = (direction * topDownMoveSpeed)
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.y = move_toward(velocity.y, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, topDownMoveSpeed)
+		velocity.y = move_toward(velocity.y, 0, topDownMoveSpeed)
 	move_and_slide()
 	
 	if isMouseMode:
@@ -187,12 +187,20 @@ func bulletHellMovement(delta):
 	else:
 		var look_direction = Input.get_vector("look_left","look_right","look_up","look_down")
 		if look_direction.length() > 0:
-			hand_sprite.rotation = look_direction.angle()
+			rotation = look_direction.angle()
 	spriteControl()
 	
 func takeDamage(dmg: int):
 	health -= dmg
 	took_damage.emit(health)
+	if health < maxHealth:
+		die()
+
+signal player_died()
+func die():
+	player_died.emit()
+	#death stuff goes here
+	queue_free()
 	
 func spriteControl():
 	face_sprite.rotation = rotation * -1
