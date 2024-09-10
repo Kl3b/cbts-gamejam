@@ -59,7 +59,7 @@ position = Vector2(1956, 599)
 shape = SubResource("RectangleShape2D_eviy0")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(1008, -60)
+position = Vector2(1015, -15)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_eviy0")
 
@@ -78,4 +78,5 @@ position = Vector2(1840, 701)
 position = Vector2(974, 1037)
 
 [node name="turret_enemy" parent="." instance=ExtResource("12_uig1v")]
-position = Vector2(714, 408)
+position = Vector2(700, 420)
+shootDown = true

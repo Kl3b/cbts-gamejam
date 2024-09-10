@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://rghq2lttechj"]
+
+[ext_resource type="Texture2D" uid="uid://cfdug13sobn5v" path="res://sprites/shapesspritesparts/red_body_square.png" id="1_4cosk"]
+[ext_resource type="Script" path="res://scripts/turret_enemy.gd" id="1_6hxk0"]
+[ext_resource type="Texture2D" uid="uid://be14ew4mycth1" path="res://sprites/shapesspritesparts/tile_background_grass.png" id="2_rhrsc"]
+[ext_resource type="Texture2D" uid="uid://bm8fvo8ww54wm" path="res://sprites/shapesspritesparts/face_f.png" id="3_p4dn7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sr6y3"]
+radius = 48.1664
+
+[node name="turret_enemy" type="RigidBody2D" groups=["enemy"]]
+collision_layer = 2
+collision_mask = 2
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 2
+script = ExtResource("1_6hxk0")
+health = 25
+fireRate = 0.2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_sr6y3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_4cosk")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(0, -47)
+scale = Vector2(1.26563, 0.888889)
+texture = ExtResource("2_rhrsc")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+texture = ExtResource("3_p4dn7")
+
+[node name="FirePointUp" type="Node2D" parent="."]
+position = Vector2(0, -47)
+rotation = -1.5708
+
+[node name="FirePointDown" type="Node2D" parent="."]
+position = Vector2(0, 39)
+rotation = 1.5708
+
+[node name="FirePointLeft" type="Node2D" parent="."]
+position = Vector2(-41, 0)
+rotation = -3.14159
+
+[node name="FirePointRight" type="Node2D" parent="."]
+position = Vector2(39, 0)

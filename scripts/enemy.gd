@@ -1,17 +1,12 @@
 extends EnemyBase
 
-@export var fireRate : float = 2.5
-@export var weaponDamage: int = 100
-@export var bulletSpeed: float = 200
-@onready var firePoint = $FirePointEnemy
-@onready var fire_rate_timer = $FireRate
-
 @onready var face_sprite = $FaceSprite
+@onready var firePoint = $FirePointEnemy
 
-var bulletPrefab = preload("res://scenes/enemybullet.tscn")
 
 var Player : Node
 func _ready():
+	super()
 	#Get player from game manager
 	Player = Gamemanager.Player
 	#Connect to mode change signal
@@ -27,24 +22,13 @@ func _physics_process(delta):
 func targetPlayer():
 	look_at(Player.position)
 	if fire_rate_timer.is_stopped():
-		shoot()
-
-func shoot():
-		#Instantiate a new bullet
-		var firedBullet = bulletPrefab.instantiate()
-		#Tell that bullet its damage, and ensure its firing from the right location
-		firedBullet.myDamage = weaponDamage
-		firedBullet.global_position = firePoint.global_position
-		firedBullet.global_rotation = firePoint.global_rotation
-		
-		#Apply an impulse force in the bullets fired direction
-		var direction = Vector2.RIGHT.rotated(global_rotation)
-		firedBullet.apply_impulse(direction * bulletSpeed)
-		
-		#Start timer for fire rate
+		shoot(firePoint)
 		fire_rate_timer.start()
-		Gamemanager.bulletContainer.add_child(firedBullet)
-		
+
+func applyBulletForce(_firedBullet, _firePoint):
+	var direction = Vector2.RIGHT.rotated(global_rotation)
+	_firedBullet.apply_impulse(direction * bulletSpeed)
+
 
 #When changing to platformer mode become inactive
 #func _on_control_mode_changed(_newControlMode):
