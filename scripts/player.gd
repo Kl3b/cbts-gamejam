@@ -83,34 +83,39 @@ func on_control_mode_change(controlMode: Gamemanager.controlMode):
 func platformer_mode(delta):
 	platformerMovement(delta)
 	
-
-func platformerMovement(delta):
+var _isJumping : bool = false
+func platformerMovement(delta):	
 	#Add the gravity.
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		velocity.y += gravity * delta
+		#velocity += get_gravity() * delta
 		face_sprite.frame = 1
 	#We are on the floor, therefore we reset the coyote timer running and check for buffered jumps
-	else:
+	elif is_on_floor():
 		face_sprite.frame = 0
 		coyote_timer.start()
+		_isJumping = false
 		#If there has been a jump input in the last bufferTime seconds, we will jump
 		if not jump_buffer_timer.is_stopped():
 			jump()
 			jump_buffer_timer.stop()
-	
+			_isJumping = true
+
 	#Check for jump input
 	if Input.is_action_just_pressed("jump"):
 		#Start the buffer timer when jump is input
 		jump_buffer_timer.start()
 		if can_jump():
 			jump()
+			_isJumping = true
+
 	
-	if velocity.y > 0:
+	if velocity.y > 0 and _isJumping:
 		# If we are moving downwards
-		velocity.y += gravity * (fallMultiplier) * delta
+		velocity.y += (gravity * fallMultiplier) * delta
 	elif velocity.y < 0 and not Input.is_action_pressed("jump"):
 		# if we are moving upwards and not holding jump, turn up gravity.
-		velocity.y += gravity * (lowJumpMultiplier) * delta
+		velocity.y += (gravity * lowJumpMultiplier) * delta
 	
 	# Get user input
 	var input_vector = Vector2.ZERO

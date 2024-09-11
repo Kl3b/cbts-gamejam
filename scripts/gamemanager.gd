@@ -26,7 +26,7 @@ func connectToPlayer():
 	
 
 func _ready():
-	CurrentLevelNumber = 1
+	CurrentLevelNumber = 3
 	getLevelData()
 	createBulletContainer()
 	self.add_child(switchTimer)

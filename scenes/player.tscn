@@ -31,6 +31,11 @@ radius = 35.5317
 script = ExtResource("1_irvto")
 bulletSpeed = 1000
 topDownMoveSpeed = 350.0
+jump_force = 2000
+gravity = 6000.0
+lowJumpMultiplier = 4.0
+fallMultiplier = 50.0
+top_speed = 600.0
 coyoteTime = 0.15
 
 [node name="FirePoint" type="Node2D" parent="."]

@@ -21,7 +21,3 @@ zoom = Vector2(0.6, 0.6)
 
 [node name="Player" parent="." instance=ExtResource("3_0u7t0")]
 position = Vector2(-1122, 496)
-jump_force = 800
-gravity = 6000.0
-lowJumpMultiplier = 4.0
-fallMultiplier = 3.0

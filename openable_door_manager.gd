@@ -1,7 +1,7 @@
 extends Node2D
 
-@export var door : Node
-@export var button : Node
+@onready var door : Node = $OpenableDoor
+@onready var button : Node = $door_button
 
 func _ready():
 	button.connect("button_pressed", buttonPressed)

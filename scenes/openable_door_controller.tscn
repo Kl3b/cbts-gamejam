@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://v8fd3xbphgv"]
+[gd_scene load_steps=4 format=3 uid="uid://v8fd3xbphgv"]
 
 [ext_resource type="Script" path="res://openable_door_manager.gd" id="1_l2qm5"]
+[ext_resource type="PackedScene" uid="uid://dbqffyo8xqxqs" path="res://scenes/openable_door.tscn" id="2_ccmsx"]
+[ext_resource type="PackedScene" uid="uid://tcfgqdcseppb" path="res://scenes/door_button.tscn" id="3_033ym"]
 
 [node name="openable_door_controller" type="Node2D"]
 script = ExtResource("1_l2qm5")
+
+[node name="OpenableDoor" parent="." instance=ExtResource("2_ccmsx")]
+
+[node name="door_button" parent="." instance=ExtResource("3_033ym")]
